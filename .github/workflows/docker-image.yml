@@ -1,6 +1,8 @@
 name: Docker Image CI
 
-on:
+on:settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: true
   push:
     branches: [ "main" ]
   pull_request:
