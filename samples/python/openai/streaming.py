@@ -1,6 +1,29 @@
 """For a better user experience, you will want to stream the response of the model
 so that the first token shows up early and you avoid waiting for long responses."""
+name: CI
 
+on: [push]
+
+jobs:
+    unit:
+        runs-on: ubuntu-latest
+
+        strategy:
+            matrix:
+                node-version: ['18', '20', '22']
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: actions/setup-node@v4
+              with:
+                node-version: ${{ matrix.node-version }}
+
+            - run: npm ci
+
+            - run: npm run lint
+
+            - run: npm test
 import os
 from openai import OpenAI
 
